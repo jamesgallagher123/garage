@@ -9,5 +9,3 @@ class Bike(val model: String,
         s"ID: $id Model: $model. Reg: $reg. Tyres: $tyres. Colour: $colour"
     }
 }
-
-//it works
