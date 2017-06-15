@@ -98,7 +98,7 @@ class Garage(var isOpen: Boolean) {
                 x.isBroken = false
             }
         })
-        println(s"The vehicle will take $hours hours to fix and cost £$price.")
+        println(s"Vehicle ${vehicle.id} will take $hours hours to fix and cost £$price.")
     }
 
     def registerEmployee(employee: Employee): Unit = {
