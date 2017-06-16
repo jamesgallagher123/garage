@@ -40,6 +40,15 @@ class Garage(var isOpen: Boolean) {
     partArrayBuffer += new Part("Vacuum Pumps")
     partArrayBuffer += new Part("Calipers")
 
+    def randomBrokenParts(vehicle: Vehicle): Unit = {
+        vehicle.parts = partArrayBuffer
+        vehicle.parts.foreach(x => {
+            x.fixTime = 1 + random.nextInt(10)
+            x.price = 10 + random.nextInt(40)
+            x.isBroken = math.random < 0.5
+        })
+    }
+
     def addVehicle(vehicle: Vehicle): Unit = {
         //assign id
         if (vehicleArrayBuffer.isEmpty) {
@@ -47,15 +56,10 @@ class Garage(var isOpen: Boolean) {
         } else {
             vehicle.id = vehicleArrayBuffer.last.id + 1
         }
+        //assign broken parts
+        this.randomBrokenParts(vehicle)
         //add to array buffer
         vehicleArrayBuffer += vehicle
-        //assign broken parts
-        vehicle.parts = partArrayBuffer
-        vehicle.parts.foreach(x => {
-            x.fixTime = 1 + random.nextInt(10)
-            x.price = 10 + random.nextInt(40)
-            x.isBroken = math.random < 0.5
-        })
     }
 
     def removeVehicleByID(id: Int): Unit = {
@@ -106,7 +110,9 @@ class Garage(var isOpen: Boolean) {
     }
 
     def open(): Unit = {
-        this.isOpen = true
+        for (x <- vehicleArrayBuffer.indices) {
+            this.fix(vehicleArrayBuffer(x))
+        }
     }
 
     def close(): Unit = {

@@ -13,7 +13,7 @@ object GarageApp {
             garage.addVehicle(new Car("Ford Focus", "ABC123", 4, 5, "Red"))
         }
 
-
+        garage.open()
 
         //garage.registerEmployee(employee1)
         //garage.removeVehicleByID(1)
